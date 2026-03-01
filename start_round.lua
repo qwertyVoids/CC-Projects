@@ -1,5 +1,6 @@
 warps = 10
 
+rednet.open("top")
 local playerDetector = peripheral.find("playerDetector")
 local currentPlayers = playerDetector.getOnlinePlayers()
 
@@ -14,9 +15,16 @@ local function startRound(players)
 
         local randomIndex = math.random(1, #acceptedWarps)
         local warp = acceptedWarps[randomIndex]
-        commands.exec(string.format("execute as %s run warp %d", player, warp))
+        commands.exec(string.format("execute as @a[name=%s, tag=!dev] run warp %d", player, warp))
         table.remove(acceptedWarps, randomIndex)
     end
+
+    commands.exec("gamemode @a[tag=!dev] survival")
 end
 
-startRound(currentPlayers)
+while true do
+    local id, msg = rednet.receive()
+    if msg == "start" then
+        startRound(currentPlayers)
+    end
+end
