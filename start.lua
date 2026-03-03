@@ -6,7 +6,7 @@ write("Press G to start")
 while true do
     local event, key = os.pullEvent("key")
     if keys.getName(key) == "g" then
-        rednet.send("void_startt")
+        rednet.send(0, "void_startt")
         os.run({}, "/rom/programs/clear.lua")
         term.setTextColor(colors.red)
         write("Wait 10 sec.")
