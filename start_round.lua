@@ -24,7 +24,7 @@ end
 
 while true do
     local id, msg = rednet.receive()
-    if msg == "start" then
+    if msg == "void_startt" then
         startRound(currentPlayers)
     end
 end
